@@ -1,47 +1,57 @@
 <%
+  # this is the template file that generates index.html
+  # to generate the index.html file, run in the console:
+  # ruby main.rb
+
   require './mes.rb'
+  require './diaSemana.rb'
 
-  @dias = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
-
-  @sala = "Anfiteatro"
+  @dias_semana = Array.new
+  @dia = DiaSemana.new("domingo", false)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("segunda", true)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("terça", true)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("quarta", true)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("quinta", true)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("sexta", true)
+  @dias_semana.push(@dia)
+  @dia = DiaSemana.new("sábado", false)
+  @dias_semana.push(@dia)
 
   @meses = Array.new
-
   @mes = Mes.new("janeiro", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("fevereiro", 28)
   @meses.push(@mes)
-
   @mes = Mes.new("março", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("abril", 30)
   @meses.push(@mes)
-
   @mes = Mes.new("maio", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("junho", 30)
   @meses.push(@mes)
-
   @mes = Mes.new("julho", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("agosto", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("setembro", 30)
   @meses.push(@mes)
-
   @mes = Mes.new("outubro", 31)
   @meses.push(@mes)
-
   @mes = Mes.new("novembro", 30)
   @meses.push(@mes)
-
   @mes = Mes.new("dezembro", 31)
   @meses.push(@mes)
+
+  @bg_color_gray = 'style="background-color: #f3f3f3;"'
+  @salas = ["Anfiteatro", "Sala de Reuniões", "Sala 225"]
+  @dias_ano = 365
+  @dia = 0 # use this variable to count from day 1 to 365
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,66 +60,68 @@
     <title>Agenda</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <!--
-    <% @meses.each do |m| %>
-      <%= m.name %>
-    <% end %>
-    -->
-
     <div id="content" class="container">
 
-      <h2><%= @sala %> - <%= @mes.name %>/2017</h2>
+      <% @salas.each do |sala| %>
+        <% @dia = 0 %>
+        <% @meses.each do |mes| %>
 
-      <table class="table table-bordered table-condensed" style="margin-top: 30px">
-        <thead>
-          <tr>
-            <th>DIA</th>
-            <th>08 - 09h</th>
-            <th>09 - 10h</th>
-            <th>10 - 11h</th>
-            <th>11 - 12h</th>
-            <th>12 - 13h</th>
-            <th>13 - 14h</th>
-            <th>14 - 15h</th>
-            <th>15 - 16h</th>
-            <th>16 - 17h</th>
-            <th>17 - 18h</th>
-            <th>18 - 19h</th>
-          </tr>
-        </thead>
-        <tbody>
-          // fazer com dias do ano (365)
-          <% for day in 1..@mes.length %>
-            <tr>
-              // fazer com dias do ano (365)
-              <th><%= day %> - <%= @dias[(day-1)%7][0..2] %></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+          <div class="mes">
+            <h2><%= sala %> - <%= mes.name %>/2017</h2>
 
+            <table class="table table-bordered table-condensed" style="margin-top: 30px">
+              <thead>
+                <tr>
+                  <th>DIA</th>
+                  <th>08 - 09h</th>
+                  <th>09 - 10h</th>
+                  <th>10 - 11h</th>
+                  <th>11 - 12h</th>
+                  <th>12 - 13h</th>
+                  <th>13 - 14h</th>
+                  <th>14 - 15h</th>
+                  <th>15 - 16h</th>
+                  <th>16 - 17h</th>
+                  <th>17 - 18h</th>
+                  <th>18 - 19h</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for day in 1..mes.length %>
+                  <tr>
+                    <%
+                    @dia = @dia + 1
+                    @ds = @dias_semana[(@dia-1)%7]
+                    @style = @ds.diaUtil ? "" : @bg_color_gray
+                    %>
+                    <th <%= @style %> > <%= day %> - <%= @ds.name[0..2] %></th>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                    <td <%= @style %> ></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </body>
 </html>

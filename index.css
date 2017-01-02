@@ -1,22 +1,22 @@
 body {font-size: 12px}
 
-#content {margin-top: 20px;}
-
 .table-ex {
   margin-bottom: 0;
-  /*
-  width: 95%;
-  max-width: 95%;
-  */
 }
 
 @media print {
   @page {
-    size: auto;   /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
+    size: auto;
+    margin: 0;  
   }
+
   body, html {
     margin-top:0px;
     padding-top:0px;
+  }
+
+  .mes {
+    page-break-after: always;
+    padding-top: 40px;
   }
 }
